@@ -17,6 +17,18 @@
     - `pip install -r requirements_dev.txt` for development
 
 
+## Project execution
+
+```sh
+# creating django settings file from dev
+cp src/website/settings_dev.py src/website/settings.py
+# creaing/migrating database
+python src/manage.py migrate
+# running server
+python src/manage.py runserver
+```
+
+
 ## Request
 
 You shall create a simple application Django 2.2+ / Python 3.6+ which,
