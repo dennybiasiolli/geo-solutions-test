@@ -1,5 +1,22 @@
 # Geo Solutions test
 
+## Project initialization
+
+- create a virtualenv using Python 3.8+
+
+    `python3 -m venv venv`
+
+- activate the virtualenv
+
+    `source venv/bin/activate`
+
+- install requirements
+
+    - `pip install -r requirements.txt` for production usage
+
+    - `pip install -r requirements_dev.txt` for development
+
+
 ## Request
 
 You shall create a simple application Django 2.2+ / Python 3.6+ which,
