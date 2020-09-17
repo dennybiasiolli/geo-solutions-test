@@ -24,6 +24,8 @@
 cp src/website/settings_dev.py src/website/settings.py
 # creating/migrating database
 python src/manage.py migrate
+# creating default users
+python src/manage.py geo_create_users
 # importing coordinaates
 python src/manage.py geo_import_coordinates_from_csv -f data/points.csv
 # running server
