@@ -22,8 +22,10 @@
 ```sh
 # creating django settings file from dev
 cp src/website/settings_dev.py src/website/settings.py
-# creaing/migrating database
+# creating/migrating database
 python src/manage.py migrate
+# importing coordinaates
+python src/manage.py geo_import_coordinates_from_csv -f data/points.csv
 # running server
 python src/manage.py runserver
 ```
