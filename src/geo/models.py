@@ -1,3 +1,4 @@
+import threading
 from django.db import models
 from django.db.models import F
 from django.db.models.functions import Sqrt
@@ -51,4 +52,4 @@ class CoordinatesRequest(models.Model):
             should_calc_points = True
         super(CoordinatesRequest, self).save(*args, **kwargs)
         if should_calc_points:
-            self.calc_points()
+            threading.Thread(target=self.calc_points).start()
