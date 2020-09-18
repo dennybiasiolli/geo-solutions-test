@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import F
+from django.db.models.functions import Sqrt
 
 
 NEAREST = 'nearest'
@@ -31,3 +33,22 @@ class CoordinatesRequest(models.Model):
     def __str__(self):
         return '{0} {1} to ({2}, {3})'.format(
             self.n, self.operation, self.x, self.y)
+
+    def calc_points(self):
+        qs = Coordinate.objects.annotate(
+            distance=Sqrt(((F('x')-self.x)**2) + ((F('y')-self.y)**2))
+        ).order_by(
+            '{0}distance'.format('-' if self.operation == FURTHEST else '')
+        )[:self.n]
+        for coordinate in qs:
+            # TODO: not requested, but we can improve coordinates relationship
+            # adding "distance" field, already computed
+            self.coordinates.add(coordinate)
+
+    def save(self, *args, **kwargs):
+        should_calc_points = False
+        if not self.pk:
+            should_calc_points = True
+        super(CoordinatesRequest, self).save(*args, **kwargs)
+        if should_calc_points:
+            self.calc_points()
