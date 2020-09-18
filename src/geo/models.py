@@ -26,6 +26,7 @@ class CoordinatesRequest(models.Model):
     y = models.FloatField()
     n = models.IntegerField()
     operation = models.CharField(max_length=8, choices=COORDINATE_CHOICES)
+    coordinates = models.ManyToManyField(Coordinate, blank=True)
 
     def __str__(self):
         return '{0} {1} to ({2}, {3})'.format(
