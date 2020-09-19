@@ -32,6 +32,16 @@ python src/manage.py geo_import_coordinates_from_csv -f data/points.csv
 python src/manage.py runserver
 ```
 
+## Project development
+
+```sh
+cd src # enters sources directory
+# launching tests
+python manage.py test
+# launching tests with coverage results
+coverage run manage.py test --settings=website.settings_test && coverage report -m && coverage html
+```
+
 
 ## Request
 
