@@ -1,7 +1,7 @@
 import threading
 from django.db import models
 from django.db.models import F
-from django.db.models.functions import Sqrt
+from django.db.models.functions import Power, Sqrt
 
 
 NEAREST = 'nearest'
@@ -37,7 +37,7 @@ class CoordinatesRequest(models.Model):
 
     def calc_points(self):
         qs = Coordinate.objects.annotate(
-            distance=Sqrt(((F('x')-self.x)**2) + ((F('y')-self.y)**2))
+            distance=Sqrt(Power((F('x')-self.x), 2) + Power((F('y')-self.y), 2))
         ).order_by(
             '{0}distance'.format('-' if self.operation == FURTHEST else '')
         )[:self.n]
