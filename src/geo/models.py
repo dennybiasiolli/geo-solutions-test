@@ -52,4 +52,4 @@ class CoordinatesRequest(models.Model):
             should_calc_points = True
         super(CoordinatesRequest, self).save(*args, **kwargs)
         if should_calc_points:
-            threading.Thread(target=self.calc_points).start()
+            self.calc_points()
